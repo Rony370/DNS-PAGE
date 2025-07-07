@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entel Perú</title>
+  <link rel="stylesheet" href="estilo.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="logo-bar">
+      <h1><span class="logo-entel">e</span>ntel Perú</h1>
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+    </div>
+    <p>Conectamos tu mundo</p>
+  </header>
+
+  <nav id="main-nav">
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#login">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-container">
+    <!-- Panel Izquierdo -->
+    <div class="left-panel">
+      <div class="login-wrapper">
+        <h1 class="logo">e</h1>
+        <h2>Bienvenido a la web de</h2>
+        <h3>Entel Perú</h3>
+        <p class="info-text">Accede a tus servicios, planes y beneficios exclusivos.</p>
+
+        <form class="login-form-modern" id="login">
+          <input type="email" placeholder="Correo electrónico" required />
+          <input type="password" placeholder="Contraseña" required />
+          <button type="submit">Ingresar</button>
+        </form>
+
+        <p class="register-link">¿No tienes cuenta? <a href="#">Regístrate</a></p>
+      </div>
+    </div>
+
+    <!-- Panel Derecho -->
+    <div class="right-panel">
+      <section id="servicios">
+        <h2>Servicios</h2>
+        <ul class="servicios-lista">
+          <li>📱 Telefonía Móvil: Prepago y Postpago</li>
+          <li>🌐 Internet hogar inalámbrico</li>
+          <li>📞 Soluciones empresariales</li>
+          <li>📡 Cobertura 4G y 5G</li>
+        </ul>
+      </section>
+
+      <section id="galeria">
+        <h2>Galería</h2>
+        <div class="carousel">
+          <img data-src="celular.jpg" alt="BENEFICION ENTEL " class="carousel-image lazy-image active">
+          <img data-src="celular2.png" alt="RECARGAS DESDE 5 SOLES" class="carousel-image lazy-image">
+          <img data-src="celular3.jpg" alt="GB DE ALTA VELOCIDAD " class="carousel-image lazy-image">
+        </div>
+      </section>
+
+      <section id="contacto">
+        <h2>Contacto</h2>
+        <p>📍 Dirección: Av. Principal, Lima - Perú</p>
+        <p>📧 Email: atencion@entel.pe</p>
+        <p>📞 Teléfono: 123-ENTEL (36835)</p>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Entel Perú - Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Carrusel
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.carousel-image');
+
+    function showNextImage() {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].classList.add('active');
+    }
+    setInterval(showNextImage, 3000);
+
+    // Menú hamburguesa
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+    });
+
+    // Lazy loading con IntersectionObserver
+    const lazyImages = document.querySelectorAll('img.lazy-image');
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.add('fade-in');
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '100px',
+      threshold: 0.1
+    });
+    lazyImages.forEach(img => {
+      observer.observe(img);
+    });
+  </script>
+
+</body>
+</html>
